@@ -23,11 +23,11 @@ function(input,output,session){
   output$myPlot <- renderPlot({
     
     distType<-input$Distribution
-    size<- input$sampleSize
-    size2<- input$sampleSize2
+    bandwith<- input$bandwith
+    zplane<- input$zplane
     
-    print(size)
-    print(size2)
+    print(bandwith)
+    print(zplane)
     # define various parameters  
     I = 64  
    
@@ -46,11 +46,12 @@ function(input,output,session){
     index_valid = index[-index_train] 
     
     # we choose bandwidth 15  
-    h = size 
+    h = bandwith 
 
     
     # iterate over all voxels  
     for (i in 1:I) {  
+      print('processing')
       print(i)
       for (j in 1:J) {  
         for (k in 1:K) { 
@@ -78,7 +79,7 @@ function(input,output,session){
       } 
     } 
     
-    slice = activity [, ,size2] 
+    slice = activity [, ,zplane] 
     
     slice[slice < 10] = 0 
     slice[slice > 100] = 100 
